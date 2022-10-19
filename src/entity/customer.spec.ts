@@ -8,4 +8,10 @@ describe("Customer unit tests", () => {
         }).toThrowError("Id is required");
     });
 
+    it("should thrown error when name is empty", () => {
+        expect(() => {
+            new Customer("123", "");
+        }).toThrowError("Name is required");
+    });
+
 });
