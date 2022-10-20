@@ -22,11 +22,11 @@ describe("Order unit tests", (): void => {
     });
 
     it("should calculate total", (): void => {
-        const itemOne = new OrderItem("1", "Item One", 100.00);
-        const itemTwo = new OrderItem("2", "Item Two", 0.99);
+        const itemOne = new OrderItem("1", "1", "Item One", 100.00, 2);
+        const itemTwo = new OrderItem("2", "2", "Item Two", 0.99, 1);
         const order = new Order("1", "1", [itemOne, itemTwo]);
 
-        expect(order.total()).toBe(100.99);
+        expect(order.total()).toBe(200.99);
     });
 
 });
