@@ -10,7 +10,7 @@ export default class OrderItem {
         this._price = price;
     }
 
-    get price(): number {
+    public get price(): number {
         return this._price;
     }
 

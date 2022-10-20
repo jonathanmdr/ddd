@@ -14,21 +14,6 @@ export default class Customer {
         this._name = name;
     }
 
-    private validate(id: string, name: string): void {
-        if (this.isInvalidString(id)) {
-            throw new Error("Id is required");
-        }
-        if (this.isInvalidString(name)) {
-            throw new Error("Name is required");
-        }
-    }
-
-    private isInvalidString(value: string): boolean {
-        return typeof value === undefined
-            || value === null
-            || value.length === 0;
-    }
-
     public changeName(name: string): void {
         this.validate(this._id, name);
 
@@ -56,6 +41,21 @@ export default class Customer {
 
     public get name(): string {
         return this._name;
+    }
+
+    private validate(id: string, name: string): void {
+        if (this.isInvalidString(id)) {
+            throw new Error("Id is required");
+        }
+        if (this.isInvalidString(name)) {
+            throw new Error("Name is required");
+        }
+    }
+
+    private isInvalidString(value: string): boolean {
+        return typeof value === undefined
+            || value === null
+            || value.length === 0;
     }
     
 }

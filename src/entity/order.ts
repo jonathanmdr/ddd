@@ -16,6 +16,10 @@ export default class Order {
         this._total = this.total();
     }
 
+    public total(): number {
+        return this._items.reduce((accumulator: number, item: OrderItem): number => accumulator + item.price, 0);
+    }
+
     private validate(id: string, customerId: string, items: OrderItem[]): void {
         if (this.isInvalidString(id)) {
             throw new Error("Id is required");
@@ -38,10 +42,6 @@ export default class Order {
         return typeof value === undefined
             || value === null
             || value.length === 0;
-    }
-
-    public total(): number {
-        return this._items.reduce((accumulator: number, item: OrderItem): number => accumulator + item.price, 0);
     }
 
 }
