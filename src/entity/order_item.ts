@@ -14,17 +14,14 @@ export default class OrderItem {
         this._name = name;
         this._price = price;
         this._quantity = quantity;
-
-        this.evaluateTotalPrice();
     }
 
     public get price(): number {
         return this._price;
     }
 
-    private evaluateTotalPrice(): void {
-        const total: number = this._price * this._quantity;
-        this._price = total;
+    public evaluateTotal(): number {
+        return this._price * this._quantity;
     }
 
     private validate(price: number, quantity: number): void {

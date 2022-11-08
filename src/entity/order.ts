@@ -17,7 +17,7 @@ export default class Order {
     }
 
     public total(): number {
-        return this._items.reduce((accumulator: number, item: OrderItem): number => accumulator + item.price, 0);
+        return this._items.reduce((accumulator: number, item: OrderItem): number => accumulator + item.evaluateTotal(), 0);
     }
 
     private validate(id: string, customerId: string, items: OrderItem[]): void {
