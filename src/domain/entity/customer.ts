@@ -8,11 +8,12 @@ export default class Customer {
     private _active: boolean = false;
     private _rewardPoints: number = 0;
 
-    constructor(id: string, name: string) {
+    constructor(id: string, name: string, address?: Address) {
         this.validate(id, name);
 
         this._id = id;
         this._name = name;
+        this._address = address;
     }
 
     public changeName(name: string): void {
@@ -46,6 +47,10 @@ export default class Customer {
 
     public get name(): string {
         return this._name;
+    }
+
+    public get address(): Address {
+        return this._address;
     }
 
     public get rewardPoints(): number {
