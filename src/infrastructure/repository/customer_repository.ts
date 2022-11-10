@@ -18,34 +18,12 @@ export default class CustomerRepositoryImpl implements CustomerRepository {
             throw new Error("Customer not found");
         }
 
-        const address = new Address(
-            customerModel.street,
-            customerModel.number,
-            customerModel.zip,
-            customerModel.city
-        );
-        return new Customer(
-            customerModel.id,
-            customerModel.name,
-            address
-        );
+        return this.toCustomer(customerModel);
     }
 
     async findAll(): Promise<Customer[]> {
         const customersModel = await CustomerModel.findAll();
-        return customersModel.map(customerModel => {
-            const address = new Address(
-                customerModel.street,
-                customerModel.number,
-                customerModel.zip,
-                customerModel.city
-            );
-            return new Customer(
-                customerModel.id,
-                customerModel.name,
-                address
-            );
-        });
+        return customersModel.map(customerModel => this.toCustomer(customerModel));
     }
 
     async create(entity: Customer): Promise<void> {
@@ -78,6 +56,28 @@ export default class CustomerRepositoryImpl implements CustomerRepository {
                 }
             }
         );
+    }
+
+    private toCustomer(customerModel: CustomerModel): Customer {
+        const address = new Address(
+            customerModel.street,
+            customerModel.number,
+            customerModel.zip,
+            customerModel.city
+        );
+        const customer = new Customer(
+            customerModel.id,
+            customerModel.name,
+            address
+        );
+
+        if (customerModel.active) {
+            customer.activate();
+        }
+
+        customer.increaseRewardPointsWith(customerModel.rewardPoints);
+
+        return customer;
     }
 
 }

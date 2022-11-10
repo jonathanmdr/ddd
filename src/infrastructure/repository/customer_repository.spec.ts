@@ -93,6 +93,9 @@ describe("Customer integration tests", (): void => {
         const address = new Address("Foo Avenue", 1, "87987000", "São Paulo");
         const customer = new Customer("1", "John Doe", address);
 
+        customer.increaseRewardPointsWith(10);
+        customer.activate();
+
         await customerRepository.create(customer);
 
         let actual = await CustomerModel.findOne({ where: { id: "1" }});
@@ -120,22 +123,24 @@ describe("Customer integration tests", (): void => {
 
     it("Should find all customers", async (): Promise<void> => {
         const customerRepository: CustomerRepository = new CustomerRepositoryImpl();
+
         const addressOne = new Address("Foo Avenue", 1, "87987000", "São Paulo");
         const customerOne = new Customer("1", "John Doe", addressOne);
+        customerOne.increaseRewardPointsWith(10);
+        customerOne.activate();
+        await customerRepository.create(customerOne);
+
         const addressTwo = new Address("Bla Avenue", 2, "80987001", "Curitiba");
         const customerTwo = new Customer("2", "Mark Doe", addressTwo);
-
-        await customerRepository.create(customerOne);
+        customerTwo.increaseRewardPointsWith(5);
+        customerTwo.activate();
         await customerRepository.create(customerTwo);
 
-        const models = await CustomerModel.findAll();
-        const actual = models.map(model => {
-            const address = new Address(model.street, model.number, model.zip, model.city);
-            return new Customer(model.id, model.name, address);
-        });
-        const expected = [customerOne, customerTwo];
+        const actual = await customerRepository.findAll();
 
-        expect(actual).toEqual(expected);
+        expect(actual.length).toBe(2);
+        expect(actual).toContainEqual(customerOne);
+        expect(actual).toContainEqual(customerTwo);
     });
 
 });
