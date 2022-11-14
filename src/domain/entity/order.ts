@@ -16,6 +16,14 @@ export default class Order {
         this._total = this.total();
     }
 
+    public get id(): string {
+        return this._id;
+    }
+
+    public get items(): OrderItem[] {
+        return this._items;
+    }
+
     public total(): number {
         return this._items.reduce((accumulator: number, item: OrderItem): number => accumulator + item.evaluateTotal(), 0);
     }
