@@ -10,19 +10,25 @@ export default class EventDispatcherImpl implements EventDispatcher {
         throw new Error("Method not implemented.");
     }
 
-    public register(eventName: string, handler: EventHandler): void {
+    public register(eventName: string, eventHandler: EventHandler): void {
         if (!this.eventHandlers[eventName]) {
             this.eventHandlers[eventName] = [];
         }
-        this.eventHandlers[eventName].push(handler);
+        this.eventHandlers[eventName].push(eventHandler);
     }
 
-    public unregister(eventName: string, handler: EventHandler): void {
-        throw new Error("Method not implemented.");
+    public unregister(eventName: string, eventHandler: EventHandler): void {
+        if (this.eventHandlers[eventName]) {
+            const index = this.eventHandlers[eventName].indexOf(eventHandler);
+
+            if (index !== -1) {
+                this.eventHandlers[eventName].splice(index, 1);
+            }
+        }
     }
 
     public unregisterAll(): void {
-        throw new Error("Method not implemented.");
+        this.eventHandlers = {};
     }
 
     public get getEventHandlers(): { [eventName: string]: EventHandler[] } {

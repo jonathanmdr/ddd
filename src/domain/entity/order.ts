@@ -34,8 +34,12 @@ export default class Order {
     }
 
     public removeItem(item: OrderItem) {
-        this._items = this._items.filter(it => it.id !== item.id);
-        this._total = this.total();
+        const index = this._items.indexOf(item);
+
+        if (index !== -1) {
+            this._items.splice(index, 1);
+            this._total = this.total();
+        }
     }
 
     public total(): number {
