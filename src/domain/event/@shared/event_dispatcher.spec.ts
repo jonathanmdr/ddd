@@ -9,11 +9,11 @@ describe("Event dispatcher unit tests", (): void => {
         const eventHandler = new SendEmailWhenProductIsCreatedHandler();
         const event = new ProductCreatedEvent({});
 
-        eventDispatcher.register(event.eventName, eventHandler);
+        eventDispatcher.register(event.getEventName(), eventHandler);
 
-        expect(eventDispatcher.getEventHandlers[event.eventName]).toBeDefined();
-        expect(eventDispatcher.getEventHandlers[event.eventName].length).toBe(1);
-        expect(eventDispatcher.getEventHandlers[event.eventName][0]).toEqual(eventHandler);
+        expect(eventDispatcher.getEventHandlers[event.getEventName()]).toBeDefined();
+        expect(eventDispatcher.getEventHandlers[event.getEventName()].length).toBe(1);
+        expect(eventDispatcher.getEventHandlers[event.getEventName()][0]).toEqual(eventHandler);
     });
 
     it("should unregister an event handler", (): void => {
@@ -21,16 +21,16 @@ describe("Event dispatcher unit tests", (): void => {
         const eventHandler = new SendEmailWhenProductIsCreatedHandler();
         const event = new ProductCreatedEvent({});
 
-        eventDispatcher.register(event.eventName, eventHandler);
+        eventDispatcher.register(event.getEventName(), eventHandler);
 
-        expect(eventDispatcher.getEventHandlers[event.eventName]).toBeDefined();
-        expect(eventDispatcher.getEventHandlers[event.eventName].length).toBe(1);
-        expect(eventDispatcher.getEventHandlers[event.eventName][0]).toEqual(eventHandler);
+        expect(eventDispatcher.getEventHandlers[event.getEventName()]).toBeDefined();
+        expect(eventDispatcher.getEventHandlers[event.getEventName()].length).toBe(1);
+        expect(eventDispatcher.getEventHandlers[event.getEventName()][0]).toEqual(eventHandler);
 
-        eventDispatcher.unregister(event.eventName, eventHandler);
+        eventDispatcher.unregister(event.getEventName(), eventHandler);
 
-        expect(eventDispatcher.getEventHandlers[event.eventName]).toBeDefined();
-        expect(eventDispatcher.getEventHandlers[event.eventName].length).toBe(0);
+        expect(eventDispatcher.getEventHandlers[event.getEventName()]).toBeDefined();
+        expect(eventDispatcher.getEventHandlers[event.getEventName()].length).toBe(0);
     });
 
     it("should unregister all event handler", (): void => {
@@ -38,15 +38,15 @@ describe("Event dispatcher unit tests", (): void => {
         const eventHandler = new SendEmailWhenProductIsCreatedHandler();
         const event = new ProductCreatedEvent({});
 
-        eventDispatcher.register(event.eventName, eventHandler);
+        eventDispatcher.register(event.getEventName(), eventHandler);
 
-        expect(eventDispatcher.getEventHandlers[event.eventName]).toBeDefined();
-        expect(eventDispatcher.getEventHandlers[event.eventName].length).toBe(1);
-        expect(eventDispatcher.getEventHandlers[event.eventName][0]).toEqual(eventHandler);
+        expect(eventDispatcher.getEventHandlers[event.getEventName()]).toBeDefined();
+        expect(eventDispatcher.getEventHandlers[event.getEventName()].length).toBe(1);
+        expect(eventDispatcher.getEventHandlers[event.getEventName()][0]).toEqual(eventHandler);
 
         eventDispatcher.unregisterAll();
 
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"]).toBeUndefined();
+        expect(eventDispatcher.getEventHandlers[event.getEventName()]).toBeUndefined();
     });
 
     it("should notify all event handlers", (): void => {
@@ -66,11 +66,11 @@ describe("Event dispatcher unit tests", (): void => {
             }
         );
 
-        eventDispatcher.register(event.eventName, eventHandler);
+        eventDispatcher.register(event.getEventName(), eventHandler);
 
-        expect(eventDispatcher.getEventHandlers[event.eventName]).toBeDefined();
-        expect(eventDispatcher.getEventHandlers[event.eventName].length).toBe(1);
-        expect(eventDispatcher.getEventHandlers[event.eventName][0]).toEqual(eventHandler);
+        expect(eventDispatcher.getEventHandlers[event.getEventName()]).toBeDefined();
+        expect(eventDispatcher.getEventHandlers[event.getEventName()].length).toBe(1);
+        expect(eventDispatcher.getEventHandlers[event.getEventName()][0]).toEqual(eventHandler);
 
         eventDispatcher.notify(event);
 

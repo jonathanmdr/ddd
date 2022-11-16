@@ -1,5 +1,13 @@
-export default interface Event {
+export default abstract class Event {
+
     dateTimeOccurred: Date;
-    eventName: string;
     eventData: any;
+
+    constructor(eventData: any) {
+        this.dateTimeOccurred = new Date();
+        this.eventData = eventData;
+    }
+
+    abstract getEventName(): string;
+
 }

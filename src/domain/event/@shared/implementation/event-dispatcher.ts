@@ -7,8 +7,8 @@ export default class EventDispatcherImpl implements EventDispatcher {
     private eventHandlers: { [eventName: string]: EventHandler[] } = {};
 
     public notify(event: Event): void {
-        if (this.eventHandlers[event.eventName]) {
-            this.eventHandlers[event.eventName].forEach(handler => handler.handle(event));
+        if (this.eventHandlers[event.getEventName()]) {
+            this.eventHandlers[event.getEventName()].forEach(handler => handler.handle(event));
         }
     }
 

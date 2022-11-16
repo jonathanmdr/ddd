@@ -1,13 +1,13 @@
 import Event from "../@shared/event";
 
-export default class ProductCreatedEvent extends Event {
+export default class CustomerUpdatedEvent extends Event {
 
     constructor(eventData: any) {
         super(eventData);
     }
 
     public getEventName(): string {
-        return "PRODUCT_CREATED_EVENT";
+        return "CUSTOMER_UPDATED_EVENT";
     }
 
 }

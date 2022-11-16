@@ -1,3 +1,6 @@
+import Event from "../event/@shared/event";
+import EventDispatcher from "../event/@shared/event_dispatcher";
+import CustomerCreatedEvent from "../event/customer/customer_created_event";
 import Address from "./address";
 
 export default class Customer {
@@ -7,13 +10,17 @@ export default class Customer {
     private _address!: Address;
     private _active: boolean = false;
     private _rewardPoints: number = 0;
+    private eventDispatcher: EventDispatcher;
 
-    constructor(id: string, name: string, address?: Address) {
+    constructor(id: string, name: string, address?: Address, eventDispatcher?: EventDispatcher) {
         this.validate(id, name);
 
         this._id = id;
         this._name = name;
         this._address = address;
+        this.eventDispatcher = eventDispatcher;
+
+        this.publishDomainEvent(new CustomerCreatedEvent(this));
     }
 
     public changeName(name: string): void {
@@ -74,6 +81,12 @@ export default class Customer {
         return typeof value === undefined
             || value === null
             || value.length === 0;
+    }
+
+    private publishDomainEvent(event: Event): void {
+        if (this.eventDispatcher) {
+            this.eventDispatcher.notify(event);
+        }
     }
     
 }
