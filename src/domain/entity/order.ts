@@ -20,8 +20,22 @@ export default class Order {
         return this._id;
     }
 
+    public get customerId(): string {
+        return this._customerId;
+    }
+
     public get items(): OrderItem[] {
         return this._items;
+    }
+
+    public addItem(item: OrderItem) {
+        this._items.push(item);
+        this._total = this.total();
+    }
+
+    public removeItem(item: OrderItem) {
+        this._items = this._items.filter(it => it.id !== item.id);
+        this._total = this.total();
     }
 
     public total(): number {

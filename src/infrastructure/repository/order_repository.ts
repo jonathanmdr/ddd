@@ -1,4 +1,5 @@
 import Order from "../../domain/entity/order";
+import OrderItem from "../../domain/entity/order_item";
 import OrderRepository from "../../domain/repository/order_repository";
 import OrderModel from "../database/sequelize/model/order";
 import OrderItemModel from "../database/sequelize/model/order_item";
@@ -6,18 +7,41 @@ import OrderItemModel from "../database/sequelize/model/order_item";
 export default class OrderRepositoryImpl implements OrderRepository {
 
     async find(id: string): Promise<Order> {
-        throw new Error("Uninplemented");
+        let orderModel;
+
+        try {
+            orderModel = await OrderModel.findOne(
+                {
+                    where: {
+                        id: id
+                    },
+                    include: [
+                        "items"
+                    ],
+                    rejectOnEmpty: true
+                }
+            );
+        } catch(error) {
+            throw new Error("Order not found")
+        }
+
+        return this.toOrder(orderModel);
     }
 
     async findAll(): Promise<Order[]> {
-        throw new Error("Uninplemented");
+        const ordersModel = await OrderModel.findAll({
+            include: [
+                "items"
+            ]
+        });
+        return ordersModel.map(model => this.toOrder(model));
     }
 
     async create(entity: Order): Promise<void> {
         await OrderModel.create(
             {
                 id: entity.id,
-                customerId: entity.id,
+                customerId: entity.customerId,
                 total: entity.total(),
                 items: entity.items.map(item => ({
                     id: item.id,
@@ -38,7 +62,75 @@ export default class OrderRepositoryImpl implements OrderRepository {
     }
 
     async update(entity: Order): Promise<void> {
-        throw new Error("Uninplemented");
+        try {
+            await OrderModel.findOne(
+                {
+                    where: {
+                        id: entity.id
+                    },
+                    rejectOnEmpty: true
+                }
+            );
+
+            await OrderModel.sequelize.transaction(async (t) => {
+                await OrderItemModel.destroy(
+                    {
+                        where: {
+                            orderId: entity.id 
+                        },
+                        transaction: t,
+                    }
+                );
+
+                const items = entity.items.map(item => ({
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    productId: item.productId,
+                    quantity: item.quantity,
+                    orderId: entity.id,
+                }));
+
+                await OrderItemModel.bulkCreate(
+                    items,
+                    {
+                        transaction: t 
+                    }
+                );
+
+                await OrderModel.update(
+                    {
+                        total: entity.total()
+                    },
+                    {
+                        where: {
+                            id: entity.id
+                        },
+                        transaction: t
+                    }
+                );
+            });
+        } catch(error) {
+            throw new Error("Order not found");
+        }
+    }
+
+    private toOrder(orderModel: OrderModel): Order {
+        const items = orderModel.items.map(item => (
+            new OrderItem(
+                item.id,
+                item.productId,
+                item.name,
+                item.price,
+                item.quantity
+            )
+        ));
+
+        return new Order(
+            orderModel.id,
+            orderModel.customerId,
+            items
+        );
     }
 
 }
