@@ -1,4 +1,4 @@
-import event from "../event";
+import Event from "../event";
 import EventDispatcher from "../event_dispatcher";
 import EventHandler from "../event_handler";
 
@@ -6,8 +6,12 @@ export default class EventDispatcherImpl implements EventDispatcher {
 
     private eventHandlers: { [eventName: string]: EventHandler[] } = {};
 
-    public notify(event: event): void {
-        throw new Error("Method not implemented.");
+    public notify(event: Event): void {
+        const eventName = event.eventData.name;
+
+        if (this.eventHandlers[eventName]) {
+            this.eventHandlers[eventName].forEach(handler => handler.handle(event));
+        }
     }
 
     public register(eventName: string, eventHandler: EventHandler): void {
