@@ -7,39 +7,42 @@ describe("Event dispatcher unit tests", (): void => {
     it("should register an event handler", (): void => {
         const eventDispatcher = new EventDispatcherImpl();
         const eventHandler = new SendEmailWhenProductIsCreatedHandler();
+        const event = new ProductCreatedEvent({});
 
-        eventDispatcher.register("PRODUCT_CREATED_EVENT", eventHandler);
+        eventDispatcher.register(event.eventName, eventHandler);
 
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"]).toBeDefined();
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"].length).toBe(1);
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"][0]).toEqual(eventHandler);
+        expect(eventDispatcher.getEventHandlers[event.eventName]).toBeDefined();
+        expect(eventDispatcher.getEventHandlers[event.eventName].length).toBe(1);
+        expect(eventDispatcher.getEventHandlers[event.eventName][0]).toEqual(eventHandler);
     });
 
     it("should unregister an event handler", (): void => {
         const eventDispatcher = new EventDispatcherImpl();
         const eventHandler = new SendEmailWhenProductIsCreatedHandler();
+        const event = new ProductCreatedEvent({});
 
-        eventDispatcher.register("PRODUCT_CREATED_EVENT", eventHandler);
+        eventDispatcher.register(event.eventName, eventHandler);
 
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"]).toBeDefined();
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"].length).toBe(1);
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"][0]).toEqual(eventHandler);
+        expect(eventDispatcher.getEventHandlers[event.eventName]).toBeDefined();
+        expect(eventDispatcher.getEventHandlers[event.eventName].length).toBe(1);
+        expect(eventDispatcher.getEventHandlers[event.eventName][0]).toEqual(eventHandler);
 
-        eventDispatcher.unregister("PRODUCT_CREATED_EVENT", eventHandler);
+        eventDispatcher.unregister(event.eventName, eventHandler);
 
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"]).toBeDefined();
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"].length).toBe(0);
+        expect(eventDispatcher.getEventHandlers[event.eventName]).toBeDefined();
+        expect(eventDispatcher.getEventHandlers[event.eventName].length).toBe(0);
     });
 
     it("should unregister all event handler", (): void => {
         const eventDispatcher = new EventDispatcherImpl();
         const eventHandler = new SendEmailWhenProductIsCreatedHandler();
+        const event = new ProductCreatedEvent({});
 
-        eventDispatcher.register("PRODUCT_CREATED_EVENT", eventHandler);
+        eventDispatcher.register(event.eventName, eventHandler);
 
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"]).toBeDefined();
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"].length).toBe(1);
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"][0]).toEqual(eventHandler);
+        expect(eventDispatcher.getEventHandlers[event.eventName]).toBeDefined();
+        expect(eventDispatcher.getEventHandlers[event.eventName].length).toBe(1);
+        expect(eventDispatcher.getEventHandlers[event.eventName][0]).toEqual(eventHandler);
 
         eventDispatcher.unregisterAll();
 
@@ -51,23 +54,23 @@ describe("Event dispatcher unit tests", (): void => {
         const eventHandler = new SendEmailWhenProductIsCreatedHandler();
         const spyEventHandler = jest.spyOn(eventHandler, "handle");
 
-        eventDispatcher.register("PRODUCT_CREATED_EVENT", eventHandler);
-
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"]).toBeDefined();
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"].length).toBe(1);
-        expect(eventDispatcher.getEventHandlers["PRODUCT_CREATED_EVENT"][0]).toEqual(eventHandler);
-
-        const createdDate = new Date();
-        const event = new ProductCreatedEvent({
-            name: "PRODUCT_CREATED_EVENT",
-            data: {
-                id: 1,
-                name: "One Product",
-                description: "One Product Description",
-                price: 10.00,
-                createdAt: createdDate
+        const event = new ProductCreatedEvent(
+            {
+                data: {
+                    id: 1,
+                    name: "One Product",
+                    description: "One Product Description",
+                    price: 10.00,
+                    createdAt: new Date()
+                }
             }
-        });
+        );
+
+        eventDispatcher.register(event.eventName, eventHandler);
+
+        expect(eventDispatcher.getEventHandlers[event.eventName]).toBeDefined();
+        expect(eventDispatcher.getEventHandlers[event.eventName].length).toBe(1);
+        expect(eventDispatcher.getEventHandlers[event.eventName][0]).toEqual(eventHandler);
 
         eventDispatcher.notify(event);
 
