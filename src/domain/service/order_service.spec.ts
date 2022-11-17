@@ -8,8 +8,7 @@ describe("Order service unit tests", (): void =>{
 
     it ("should place an order", (): void => {
         const address = new Address("Street bla", 1234, "12.345-678", "São Paulo");
-        const customer = new Customer("1", "John Doe");
-        customer.address = address;
+        const customer = new Customer("1", "John Doe", address);
         customer.activate();
 
         const item = new OrderItem("1", "1", "Item One", 10.00, 2);
@@ -22,8 +21,7 @@ describe("Order service unit tests", (): void =>{
 
     it ("should thrown error when place order without items", (): void => {
         const address = new Address("Street bla", 1234, "12.345-678", "São Paulo");
-        const customer = new Customer("1", "John Doe");
-        customer.address = address;
+        const customer = new Customer("1", "John Doe", address);
         customer.activate();
 
         expect((): void => {
