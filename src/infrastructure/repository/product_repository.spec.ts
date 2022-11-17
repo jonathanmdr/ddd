@@ -93,8 +93,7 @@ describe("Product integration tests", (): void => {
         await productRepository.create(productOne);
         await productRepository.create(productTwo);
 
-        const models = await ProductModel.findAll();
-        const actual = models.map(model => new Product(model.id, model.name, model.price));
+        const actual = await productRepository.findAll();
         const expected = [productOne, productTwo];
 
         expect(actual).toEqual(expected);
