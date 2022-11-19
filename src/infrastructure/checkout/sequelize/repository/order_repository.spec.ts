@@ -7,10 +7,10 @@ import CustomerRepository from "../../../../domain/customer/repository/customer_
 import Address from "../../../../domain/customer/value-object/address";
 import Product from "../../../../domain/product/entity/product";
 import ProductRepository from "../../../../domain/product/repository/product_repository";
-import CustomerModel from "../../../database/sequelize/model/customer";
+import CustomerModel from "../../../customer/sequelize/model/customer";
 import ProductModel from "../../../product/sequelize/model/product";
 import ProductRepositoryImpl from "../../../product/sequelize/repository/product_repository";
-import CustomerRepositoryImpl from "../../../repository/customer_repository";
+import CustomerRepositoryImpl from "../../../customer/sequelize/repository/customer_repository";
 import OrderModel from "../model/order";
 import OrderItemModel from "../model/order_item";
 import OrderRepositoryImpl from "./order_repository";
