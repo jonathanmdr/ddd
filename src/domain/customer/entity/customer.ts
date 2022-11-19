@@ -1,8 +1,8 @@
-import Event from "../@shared/event/event";
-import EventDispatcher from "../@shared/event/event_dispatcher";
-import CustomerCreatedEvent from "../event/customer/customer_created_event";
-import CustomerUpdatedEvent from "../event/customer/customer_updated_event";
-import Address from "./address";
+import Event from "../../@shared/event/event";
+import EventDispatcher from "../../@shared/event/event_dispatcher";
+import CustomerCreatedEvent from "../event/customer_created_event";
+import CustomerUpdatedEvent from "../event/customer_updated_event";
+import Address from "../value-object/address";
 
 export default class Customer {
 

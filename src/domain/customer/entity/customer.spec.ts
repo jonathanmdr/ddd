@@ -1,10 +1,10 @@
-import EventDispatcherImpl from "../@shared/event/implementation/event-dispatcher";
-import CustomerCreatedEvent from "../event/customer/customer_created_event";
-import CustomerUpdatedEvent from "../event/customer/customer_updated_event";
-import PrintConsoleLogFirstHandler from "../event/customer/handler/print_console_log_first_handler";
-import PrintConsoleLogSecondHandler from "../event/customer/handler/print_console_log_second_handler";
-import PrintConsoleLogWhenAddressIsChangedHandler from "../event/customer/handler/print_console_log_when_address_is_changed_handler";
-import Address from "./address";
+import EventDispatcherImpl from "../../@shared/event/implementation/event-dispatcher";
+import CustomerCreatedEvent from "../event/customer_created_event";
+import CustomerUpdatedEvent from "../event/customer_updated_event";
+import PrintConsoleLogFirstHandler from "../event/handler/print_console_log_first_handler";
+import PrintConsoleLogSecondHandler from "../event/handler/print_console_log_second_handler";
+import PrintConsoleLogWhenAddressIsChangedHandler from "../event/handler/print_console_log_when_address_is_changed_handler";
+import Address from "../value-object/address";
 import Customer from "./customer";
 
 describe("Customer unit tests", (): void => {
