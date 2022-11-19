@@ -1,4 +1,4 @@
-import Event from "../@shared/event";
+import Event from "../../event/@shared/event";
 
 export default class ProductCreatedEvent extends Event {
 

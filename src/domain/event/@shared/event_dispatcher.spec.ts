@@ -1,5 +1,5 @@
-import SendEmailWhenProductIsCreatedHandler from "../product/handler/send_email_when_product_is_created_handler";
-import ProductCreatedEvent from "../product/product_created_event";
+import SendEmailWhenProductIsCreatedHandler from "../../product/event/handler/send_email_when_product_is_created_handler";
+import ProductCreatedEvent from "../../product/event/product_created_event";
 import EventDispatcherImpl from "./implementation/event-dispatcher";
 
 describe("Event dispatcher unit tests", (): void => {
