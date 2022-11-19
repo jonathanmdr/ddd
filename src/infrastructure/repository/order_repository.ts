@@ -1,6 +1,6 @@
-import Order from "../../domain/entity/order";
-import OrderItem from "../../domain/entity/order_item";
-import OrderRepository from "../../domain/repository/order_repository";
+import Order from "../../domain/checkout/entity/order";
+import OrderItem from "../../domain/checkout/entity/order_item";
+import OrderRepository from "../../domain/checkout/repository/order_repository";
 import OrderModel from "../database/sequelize/model/order";
 import OrderItemModel from "../database/sequelize/model/order_item";
 
