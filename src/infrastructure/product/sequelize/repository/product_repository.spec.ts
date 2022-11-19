@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
-import Product from "../../domain/product/entity/product";
-import ProductRepository from "../../domain/product/repository/product_repository";
-import ProductModel from "../database/sequelize/model/product";
+import Product from "../../../../domain/product/entity/product";
+import ProductRepository from "../../../../domain/product/repository/product_repository";
+import ProductModel from "../model/product";
 import ProductRepositoryImpl from "./product_repository";
 
 describe("Product integration tests", (): void => {

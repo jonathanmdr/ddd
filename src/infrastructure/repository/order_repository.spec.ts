@@ -10,10 +10,10 @@ import ProductRepository from "../../domain/product/repository/product_repositor
 import CustomerModel from "../database/sequelize/model/customer";
 import OrderModel from "../database/sequelize/model/order";
 import OrderItemModel from "../database/sequelize/model/order_item";
-import ProductModel from "../database/sequelize/model/product";
+import ProductModel from "../product/sequelize/model/product";
 import CustomerRepositoryImpl from "./customer_repository";
 import OrderRepositoryImpl from "./order_repository";
-import ProductRepositoryImpl from "./product_repository";
+import ProductRepositoryImpl from "../product/sequelize/repository/product_repository";
 
 describe("Order integration tests", (): void => {
 
