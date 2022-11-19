@@ -1,19 +1,19 @@
 import { Sequelize } from "sequelize-typescript";
-import Address from "../../domain/customer/value-object/address";
-import Customer from "../../domain/customer/entity/customer";
-import Order from "../../domain/checkout/entity/order";
-import OrderItem from "../../domain/checkout/entity/order_item";
-import Product from "../../domain/product/entity/product";
-import CustomerRepository from "../../domain/customer/repository/customer_repository";
-import OrderRepository from "../../domain/checkout/repository/order_repository";
-import ProductRepository from "../../domain/product/repository/product_repository";
-import CustomerModel from "../database/sequelize/model/customer";
-import OrderModel from "../database/sequelize/model/order";
-import OrderItemModel from "../database/sequelize/model/order_item";
-import ProductModel from "../product/sequelize/model/product";
-import CustomerRepositoryImpl from "./customer_repository";
+import Order from "../../../../domain/checkout/entity/order";
+import OrderItem from "../../../../domain/checkout/entity/order_item";
+import OrderRepository from "../../../../domain/checkout/repository/order_repository";
+import Customer from "../../../../domain/customer/entity/customer";
+import CustomerRepository from "../../../../domain/customer/repository/customer_repository";
+import Address from "../../../../domain/customer/value-object/address";
+import Product from "../../../../domain/product/entity/product";
+import ProductRepository from "../../../../domain/product/repository/product_repository";
+import CustomerModel from "../../../database/sequelize/model/customer";
+import ProductModel from "../../../product/sequelize/model/product";
+import ProductRepositoryImpl from "../../../product/sequelize/repository/product_repository";
+import CustomerRepositoryImpl from "../../../repository/customer_repository";
+import OrderModel from "../model/order";
+import OrderItemModel from "../model/order_item";
 import OrderRepositoryImpl from "./order_repository";
-import ProductRepositoryImpl from "../product/sequelize/repository/product_repository";
 
 describe("Order integration tests", (): void => {
 
