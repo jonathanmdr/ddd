@@ -1,4 +1,4 @@
-import EventDispatcherImpl from "../event/@shared/implementation/event-dispatcher";
+import EventDispatcherImpl from "../@shared/event/implementation/event-dispatcher";
 import CustomerCreatedEvent from "../event/customer/customer_created_event";
 import CustomerUpdatedEvent from "../event/customer/customer_updated_event";
 import PrintConsoleLogFirstHandler from "../event/customer/handler/print_console_log_first_handler";

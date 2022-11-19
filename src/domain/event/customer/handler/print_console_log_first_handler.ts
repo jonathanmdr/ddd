@@ -1,4 +1,4 @@
-import EventHandler from "../../@shared/event_handler";
+import EventHandler from "../../../@shared/event/event_handler";
 import CustomerCreatedEvent from "../customer_created_event";
 
 export default class PrintConsoleLogFirstHandler implements EventHandler<CustomerCreatedEvent> {

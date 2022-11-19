@@ -1,5 +1,5 @@
-import Event from "../event/@shared/event";
-import EventDispatcher from "../event/@shared/event_dispatcher";
+import Event from "../@shared/event/event";
+import EventDispatcher from "../@shared/event/event_dispatcher";
 import CustomerCreatedEvent from "../event/customer/customer_created_event";
 import CustomerUpdatedEvent from "../event/customer/customer_updated_event";
 import Address from "./address";

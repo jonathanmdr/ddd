@@ -1,4 +1,4 @@
-import EventHandler from "../../@shared/event_handler";
+import EventHandler from "../../../@shared/event/event_handler";
 import CustomerUpdatedEvent from "../customer_updated_event";
 
 export default class PrintConsoleLogWhenAddressIsChangedHandler implements EventHandler<CustomerUpdatedEvent> {
